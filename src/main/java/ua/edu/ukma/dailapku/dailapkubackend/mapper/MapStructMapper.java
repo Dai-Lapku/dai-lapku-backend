@@ -12,8 +12,10 @@ import ua.edu.ukma.dailapku.dailapkubackend.model.User;
 
 import java.util.List;
 
-@Mapper(unmappedTargetPolicy = ReportingPolicy.WARN, componentModel = "spring")
+// TODO: fix unmapped values
+@Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE, componentModel = "spring")
 public interface MapStructMapper {
+    // FIXME: next line do not compile sometimes, just comment it, build, then uncomment and build again
     @Mapping(target = "role", source = "role")
     UserGetDto userToGetDto(User user);
 

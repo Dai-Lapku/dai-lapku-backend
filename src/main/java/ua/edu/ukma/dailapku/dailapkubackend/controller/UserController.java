@@ -46,7 +46,7 @@ public class UserController {
         );
     }
 
-    @PutMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    @PutMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Void> update(@PathVariable(value = "id") Long id,
                                        @Valid @RequestBody UserPostDto userPostDto) {
         var user = userRepository.getReferenceById(id);
