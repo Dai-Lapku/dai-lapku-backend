@@ -20,6 +20,10 @@ public class Animal {
     @Column(nullable = false)
     private String name;
 
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private Sex sex;
+
     @Temporal(TemporalType.DATE)
     @Column(nullable = false)
     private java.util.Date birthDate;
@@ -28,6 +32,7 @@ public class Animal {
     @JoinColumn(name = "species_id", nullable = false)
     private Species species;
 
+    private String breed;
 
     @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "shelter_id", nullable = false)

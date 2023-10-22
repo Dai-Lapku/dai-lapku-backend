@@ -24,13 +24,9 @@ public class User {
     private String password;
     private boolean enabled = true;
 
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(
-            name = "users_roles",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "role_id")
-    )
-    private Set<Role> roles;
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private Role role;
 
     @ManyToMany(fetch = FetchType.LAZY, mappedBy = "managers")
     @ToString.Exclude
