@@ -29,11 +29,11 @@ public class AuthService {
     public AuthenticationResponse authenticate(AuthenticationRequest authRequest) {
         authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
-                        authRequest.getLogin(),
+                        authRequest.getUsername(),
                         authRequest.getPassword()
                 )
         );
-        User user = userInfoService.getUserByUsername(authRequest.getLogin());
+        User user = userInfoService.getUserByUsername(authRequest.getUsername());
         String token = jwtService.generateToken(user);
         return new AuthenticationResponse(token);
     }

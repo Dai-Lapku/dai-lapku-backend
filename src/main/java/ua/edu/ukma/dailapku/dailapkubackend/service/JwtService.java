@@ -18,7 +18,7 @@ public class JwtService {
     private final String secretKey = "4428472B4B6250655368566D597133743677397A244326452948404D63516654";
 
     public String generateToken(UserDetails userDetails) {
-        return generateToken(Map.of(), userDetails);
+        return generateToken(Map.of("role", userDetails.getAuthorities()), userDetails);
     }
 
     public String generateToken(Map<String, Object> claims, UserDetails userDetails) {
