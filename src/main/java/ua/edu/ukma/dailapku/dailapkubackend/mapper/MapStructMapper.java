@@ -5,10 +5,7 @@ import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
 import org.mapstruct.ReportingPolicy;
 import ua.edu.ukma.dailapku.dailapkubackend.dto.*;
-import ua.edu.ukma.dailapku.dailapkubackend.model.Animal;
-import ua.edu.ukma.dailapku.dailapkubackend.model.Shelter;
-import ua.edu.ukma.dailapku.dailapkubackend.model.Species;
-import ua.edu.ukma.dailapku.dailapkubackend.model.User;
+import ua.edu.ukma.dailapku.dailapkubackend.model.*;
 
 import java.util.List;
 
@@ -16,11 +13,10 @@ import java.util.List;
 @Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE, componentModel = "spring")
 public interface MapStructMapper {
     // FIXME: next line do not compile sometimes, just comment it, build, then uncomment and build again
-    @Mapping(target = "role", source = "role")
     UserGetDto userToGetDto(User user);
 
     List<UserGetDto> usersToDtoList(List<User> users);
-
+    @Mapping(target = "role", source = "role")
     User postDtoToUser(UserPostDto userPostDto);
 
     void updateUserFromDto(UserPostDto dto, @MappingTarget User user);
@@ -48,4 +44,14 @@ public interface MapStructMapper {
     Animal postDtoToAnimal(AnimalPostDto animalPostDto);
 
     void updateShelterFromDto(AnimalPostDto dto, @MappingTarget Animal animal);
+
+    // Add a default method for mapping enums
+    default String map(Role gender) {
+        return gender.name();
+    }
+
+    // Add a default method for reverse mapping enums
+    default Role map(String gender) {
+        return Role.valueOf(gender);
+    }
 }

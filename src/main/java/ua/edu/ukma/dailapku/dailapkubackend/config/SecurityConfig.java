@@ -35,8 +35,7 @@ public class SecurityConfig {
 
     @Bean
     public UserDetailsService userDetailsService() {
-        return username -> (UserDetails) userInfoService.getUserByLogin(username)
-                .orElseThrow(() -> new UsernameNotFoundException("User not found " + username));
+        return username -> (UserDetails) userInfoService.getUserByUsername(username);
     }
 
 
@@ -59,7 +58,7 @@ public class SecurityConfig {
 
 
     @Bean
-    public AuthenticationManager authenticationProvider(AuthenticationConfiguration config) throws Exception {
+    public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception {
         return config.getAuthenticationManager();
     }
 

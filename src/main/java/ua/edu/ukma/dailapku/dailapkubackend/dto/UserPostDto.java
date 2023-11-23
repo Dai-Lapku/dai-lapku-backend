@@ -7,6 +7,7 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
+import ua.edu.ukma.dailapku.dailapkubackend.model.Role;
 
 @Getter
 @Setter
@@ -23,4 +24,6 @@ public class UserPostDto {
     @NotBlank
     @Size(min=8,max=255)
     private String password;
+
+    private Role role;
 }

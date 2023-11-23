@@ -33,8 +33,7 @@ public class AuthService {
                         authRequest.getPassword()
                 )
         );
-        User user = userInfoService.getUserByLogin(authRequest.getLogin())
-                .orElseThrow();
+        User user = userInfoService.getUserByUsername(authRequest.getLogin());
         String token = jwtService.generateToken(user);
         return new AuthenticationResponse(token);
     }
