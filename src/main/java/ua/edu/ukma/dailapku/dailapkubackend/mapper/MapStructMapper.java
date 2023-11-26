@@ -16,7 +16,6 @@ public interface MapStructMapper {
     UserGetDto userToGetDto(User user);
 
     List<UserGetDto> usersToDtoList(List<User> users);
-    @Mapping(target = "role", source = "role")
     User postDtoToUser(UserPostDto userPostDto);
 
     void updateUserFromDto(UserPostDto dto, @MappingTarget User user);
