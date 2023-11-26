@@ -37,6 +37,9 @@ public class User implements UserDetails {
     @ToString.Exclude
     private Set<Shelter> shelters;
 
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<UserLike> likedAnimals = new HashSet<>();
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
