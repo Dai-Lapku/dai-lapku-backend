@@ -3,14 +3,15 @@ package ua.edu.ukma.dailapku.dailapkubackend.controller;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ua.edu.ukma.dailapku.dailapkubackend.dto.UserGetDto;
 import ua.edu.ukma.dailapku.dailapkubackend.dto.UserPostDto;
 import ua.edu.ukma.dailapku.dailapkubackend.mapper.MapStructMapper;
 import ua.edu.ukma.dailapku.dailapkubackend.model.Role;
+import ua.edu.ukma.dailapku.dailapkubackend.model.User;
 import ua.edu.ukma.dailapku.dailapkubackend.repository.UserRepository;
-import org.springframework.http.MediaType;
 
 import java.util.List;
 
@@ -58,6 +59,14 @@ public class UserController {
     @DeleteMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Void> update(@PathVariable(value = "id") Long id) {
         userRepository.deleteById(id);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @PutMapping("/block/{id}")
+    public ResponseEntity<Void> blockUser(@PathVariable Long id) {
+        User user = userRepository.findById(id).get();
+        user.setEnabled(false);
+        userRepository.save(user);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 

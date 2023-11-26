@@ -21,6 +21,19 @@ public interface MapStructMapper {
 
     void updateUserFromDto(UserPostDto dto, @MappingTarget User user);
 
+    UserProfile userProfilePostDtoToEntity(UserProfilePostDto userProfilePostDto);
+
+    UserProfileGetDto userProfileToGetDto(UserProfile userProfile);
+
+    List<UserProfileGetDto> userProfilesToGetDtoList(List<UserProfile> userProfiles);
+
+    void updateUserProfileFromDto(UserProfilePostDto dto, @MappingTarget UserProfile userProfile);
+
+    AdoptionRequestGetDto adoptionRequestsToGetDto(AdoptionRequest adoptionRequest);
+    List<AdoptionRequestGetDto> adoptionRequestsToGetDtoList(List<AdoptionRequest> adoptionRequests);
+
+    AdoptionRequest adoptionRequestPostDtoToEntity(AdoptionRequestPostDto adoptionRequestPostDto);
+
     SpeciesGetDto speciesToGetDto(Species species);
 
     List<SpeciesGetDto> speciesToDtoList(List<Species> species);
