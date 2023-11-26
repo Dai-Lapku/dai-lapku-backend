@@ -5,13 +5,8 @@ import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
 @Entity
 @Table(name = "users")
@@ -31,6 +26,9 @@ public class User implements UserDetails {
     private String password;
     private boolean enabled = true;
 
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private UserProfile userProfile;
+
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private Role role;
@@ -38,6 +36,9 @@ public class User implements UserDetails {
     @ManyToMany(fetch = FetchType.LAZY, mappedBy = "managers")
     @ToString.Exclude
     private Set<Shelter> shelters;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<UserLike> likedAnimals = new HashSet<>();
 
     @Override
     public boolean equals(Object o) {
